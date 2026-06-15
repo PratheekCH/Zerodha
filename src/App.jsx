@@ -3,7 +3,7 @@ import './App.css'
 import Header from './Header'
 import Products from './Products.jsx'
 import Register from './Register.jsx'
-import Login from '../Login.jsx'
+import Login from './Login.jsx'
 import Home from './Home.jsx'
 import About from './About.jsx'
 import {Routes,Route} from "react-router-dom"

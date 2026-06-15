@@ -1,4 +1,17 @@
 import { useState } from "react"
+import {z} from "zod"
+
+
+let userschema=z.string().min(6,"username must need min 6characters").max(16,'max limit 16 characters')
+let passwordchema=z.string().min(8,"username must need min 8characters").max(16,'max limit 16 characters')
+
+function validate(schema,value){
+  if(!value) return ""
+ let result= schema.safeParse(value)
+ if(result.success) return ""
+ return result.error.issues[0].message
+}
+
 function Login() {
     const [username, setusername] = useState('')
     const [password, setpassword] = useState('')
@@ -24,11 +37,13 @@ function Login() {
   return (
     <>
     <section style={{textAlign:"center"}}>
-        <h1>Login to your account</h1><br />
+        <h1 class='text-red-400' >Login to your account</h1><br />
      <form onSubmit={senddetails} >
     <input  onChange={(e)=>{setusername(e.target.value)}}    type="text" placeholder="username"  /><br />
+    <p>{validate(userschema,username)}</p>
     <input  onChange={(e)=>{setpassword(e.target.value)}}     type="text"  placeholder="password" /><br />
-    <button type="submit" >Login</button>
+    <p>{validate(passwordchema,password)}</p>
+    <button  class='bg-sky-400 rounded-b-md'   type="submit" >Login</button>
      </form>
 
     </section>
